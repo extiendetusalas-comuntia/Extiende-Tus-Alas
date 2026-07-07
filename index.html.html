@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extiende tus Alas — Guía de Canalización</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --dk1:#000000;
+    --lt1:#FFFFFF;
+    --dk2:#4EC3E0;
+    --lt2:#A192B2;
+    --accent1:#A4D65E;
+    --accent2:#A0DFEE;
+    --accent3:#B3A7C1;
+    --accent4:#ABDA6C;
+    --accent5:#5168AF;
+    --accent6:#F9D055;
+
+    --ink:#20242b;
+    --paper:#fbfaf7;
+    --paper-2:#f2f0ea;
+    --line: rgba(32,36,43,0.12);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+
+  .page{ max-width:1000px; margin:0 auto; padding:0 0 40px 0; }
+
+  h1,h2,h3{ font-family:'Fraunces', serif; margin:0; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background: linear-gradient(160deg, var(--accent5) 0%, #405295 55%, #333f77 100%);
+    color:var(--lt1);
+    padding:64px 48px 56px;
+    overflow:hidden;
+    border-radius:0 0 32px 32px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; top:-90px; right:-90px;
+    width:300px; height:300px; border-radius:50%;
+    background:var(--accent1); opacity:0.16;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; bottom:-120px; left:-60px;
+    width:260px; height:260px; border-radius:50%;
+    background:var(--dk2); opacity:0.18;
+  }
+  .hero-eyebrow{
+    font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+    font-weight:700; color:var(--accent6); margin-bottom:14px; position:relative; z-index:2;
+  }
+  .hero h1{
+    font-size:clamp(34px,5vw,54px); font-weight:600; line-height:1.05; letter-spacing:-.01em;
+    position:relative; z-index:2; max-width:680px;
+  }
+  .hero h1 em{ font-style:normal; color:var(--accent1); }
+  .hero p.lead{
+    margin-top:18px; font-size:17px; max-width:560px; color:#e9e9f4;
+    position:relative; z-index:2; font-weight:500;
+  }
+  .hero-audience{
+    margin-top:28px; display:inline-flex; gap:10px; align-items:center;
+    background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25);
+    padding:10px 18px; border-radius:100px; font-size:13.5px; font-weight:700;
+    position:relative; z-index:2;
+  }
+  .hero-audience .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent1); }
+
+  /* signature wing/thread motif */
+  .thread{
+    position:absolute; top:0; bottom:0; left:40px; width:2px;
+    background:linear-gradient(var(--accent1), var(--dk2) 40%, var(--accent6) 70%, var(--accent5));
+    opacity:0.5;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding:44px 48px; position:relative; }
+  .section-tag{
+    font-size:12px; font-weight:800; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--accent5); margin-bottom:8px;
+  }
+  .section-title{ font-size:28px; font-weight:600; margin-bottom:6px; }
+  .section-sub{ color:#5b5f6b; font-size:15px; max-width:640px; margin-bottom:28px; }
+
+  /* Qué es / Objetivo */
+  .twocol{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .card{
+    background:var(--lt1); border:1px solid var(--line); border-radius:18px;
+    padding:26px 26px; box-shadow:0 1px 2px rgba(0,0,0,0.03);
+  }
+  .card h3{ font-size:18px; font-weight:600; margin-bottom:10px; color:var(--accent5); }
+  .card p{ font-size:14.5px; color:#3a3d45; margin:0; }
+  .card.filled{ background:var(--accent5); color:var(--lt1); }
+  .card.filled h3{ color:var(--accent6); }
+  .card.filled p{ color:#ecebf6; }
+
+  /* Stats strip */
+  .stats-wrap{ background:var(--paper-2); }
+  .stats{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .stat{
+    background:var(--lt1); border-radius:16px; padding:20px 14px; text-align:center;
+    border:1px solid var(--line);
+  }
+  .stat .num{ font-family:'Fraunces',serif; font-size:30px; font-weight:600; color:var(--accent5); }
+  .stat .lbl{ font-size:12px; color:#5b5f6b; margin-top:4px; font-weight:600; }
+  .stat.hi .num{ color:var(--accent1); -webkit-text-stroke:0; }
+  .stat.hi { border-color: var(--accent1); }
+  .years{ display:flex; gap:10px; margin-top:16px; justify-content:center; font-family:'Fraunces',serif; font-weight:600; font-size:14px; color:#7c8091; letter-spacing:.05em;}
+
+  /* Rol procuradurias */
+  .role-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .role-card{
+    background:var(--lt1); border-radius:16px; padding:22px 20px; border:1px solid var(--line);
+    border-top:4px solid var(--dk2);
+  }
+  .role-card .n{ font-family:'Fraunces',serif; font-size:26px; font-weight:600; color:var(--dk2); margin-bottom:8px; }
+  .role-card p{ margin:0; font-size:14px; font-weight:600; color:var(--ink); }
+  .allies{ margin-top:22px; display:flex; gap:12px; flex-wrap:wrap; }
+  .allies span{
+    background:var(--accent5); color:var(--lt1); font-weight:700; font-size:13px;
+    padding:8px 16px; border-radius:100px;
+  }
+
+  /* Cambios 2026 */
+  .change-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .change{
+    display:flex; gap:14px; align-items:flex-start; background:var(--lt1);
+    border:1px solid var(--line); border-radius:14px; padding:18px 18px;
+  }
+  .change .ico{
+    width:38px; height:38px; border-radius:10px; flex:none;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--accent2); color:var(--accent5); font-weight:800; font-size:15px;
+  }
+  .change p{ margin:0; font-size:14.5px; font-weight:600; }
+
+  /* Timeline fechas */
+  .timeline-wrap{ background:linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%); }
+  .timeline{ display:flex; justify-content:space-between; position:relative; margin-top:10px; padding:0 10px;}
+  .timeline::before{
+    content:""; position:absolute; top:19px; left:6%; right:6%; height:3px;
+    background:repeating-linear-gradient(90deg, var(--lt2) 0 8px, transparent 8px 16px);
+  }
+  .tl-item{ text-align:center; position:relative; width:30%; }
+  .tl-dot{
+    width:40px; height:40px; border-radius:50%; margin:0 auto 12px; position:relative; z-index:2;
+    display:flex; align-items:center; justify-content:center; color:var(--lt1); font-weight:800; font-family:'Fraunces',serif;
+    font-size:15px; border:4px solid var(--paper-2);
+  }
+  .tl-item:nth-child(1) .tl-dot{ background:var(--accent1); }
+  .tl-item:nth-child(2) .tl-dot{ background:#e0568f; }
+  .tl-item:nth-child(3) .tl-dot{ background:#f0824a; }
+  .tl-month{ font-family:'Fraunces',serif; font-weight:600; font-size:19px; }
+  .tl-note{ font-size:12.5px; color:#6a6e79; margin-top:2px; }
+  .pin-note{
+    margin-top:26px; background:var(--lt1); border-left:4px solid var(--accent6);
+    padding:14px 18px; border-radius:8px; font-size:14px; font-weight:700;
+  }
+
+  /* Modalidades */
+  .modalities{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .mod{
+    border-radius:20px; overflow:hidden; border:1px solid var(--line); background:var(--lt1);
+  }
+  .mod-head{ padding:20px 22px; color:var(--dk1); }
+  .mod.segura .mod-head{ background:var(--accent1); }
+  .mod.exito .mod-head{ background:var(--lt2); color:var(--lt1); }
+  .mod-head .tag{ font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.1em; opacity:.75;}
+  .mod-head h3{ font-size:22px; font-weight:600; margin-top:4px; }
+  .mod-body{ padding:20px 22px; }
+  .mod-row{ display:flex; justify-content:space-between; font-size:13.5px; padding:9px 0; border-bottom:1px dashed var(--line); }
+  .mod-row:last-child{ border-bottom:none; }
+  .mod-row b{ color:#5b5f6b; font-weight:700; }
+  .mod-row span{ font-weight:700; text-align:right; max-width:60%; }
+  .mod-duration{
+    display:inline-block; margin-top:14px; font-weight:800; font-size:13.5px;
+    padding:8px 14px; border-radius:100px;
+  }
+  .mod.segura .mod-duration{ background:#eef7de; color:#5f7d2c; }
+  .mod.exito .mod-duration{ background:#efeaf3; color:var(--lt2); }
+  .flow-arrow{
+    text-align:center; margin:18px 0 4px; font-size:13px; font-weight:700; color:var(--accent5);
+  }
+
+  .criteria{ margin-top:26px; }
+  .criteria-title{ font-size:14px; font-weight:800; color:var(--accent5); margin-bottom:10px; }
+  .criteria ul{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .criteria li{
+    background:var(--lt1); border:1px solid var(--line); border-radius:10px; padding:12px 14px;
+    font-size:13.5px; font-weight:600;
+  }
+
+  /* Priorización + documentos */
+  .prio-wrap{ background:var(--accent5); color:var(--lt1); border-radius:24px; margin:0 48px 0; padding:36px 40px; }
+  .prio-wrap .section-tag{ color:var(--accent6); }
+  .prio-wrap .section-title{ color:var(--lt1); }
+  .prio-wrap .section-sub{ color:#dcdbee; }
+  .checklist{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .check{
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.25);
+    border-radius:14px; padding:16px 16px; font-size:13.5px; font-weight:700;
+    display:flex; gap:10px; align-items:flex-start;
+  }
+  .check .c-ico{ color:var(--accent1); font-weight:900; }
+  .prio-tag{
+    margin-top:20px; display:inline-block; background:var(--accent6); color:var(--dk1);
+    font-weight:800; font-size:13px; padding:8px 16px; border-radius:100px;
+  }
+
+  /* Primer paso */
+  .firststep{
+    background:var(--paper-2); border-radius:24px; margin:44px 48px 0; padding:36px 40px;
+    border:1px solid var(--line);
+  }
+  .fs-list{ display:flex; flex-direction:column; gap:12px; margin-top:20px; }
+  .fs-item{
+    display:flex; gap:16px; align-items:flex-start; background:var(--lt1);
+    border-radius:14px; padding:16px 18px; border:1px solid var(--line);
+  }
+  .fs-num{
+    flex:none; width:30px; height:30px; border-radius:50%; background:var(--accent5); color:var(--lt1);
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:600; font-size:14px;
+  }
+  .fs-item b{ display:block; font-size:14.5px; margin-bottom:2px; }
+  .fs-item p{ margin:0; font-size:13.5px; color:#565a64; }
+  .fs-disclaimer{
+    margin-top:18px; font-size:13px; font-style:italic; color:#6a6e79;
+  }
+
+  /* Footer / contacto */
+  footer{
+    margin:44px 48px 0; background:var(--dk1); color:var(--lt1); border-radius:24px;
+    padding:38px 40px; display:flex; justify-content:space-between; align-items:center; gap:30px;
+    flex-wrap:wrap;
+  }
+  footer .msg{ max-width:480px; font-size:14px; color:#cfd0d6; }
+  footer h3{ color:var(--accent1); font-size:20px; margin-bottom:12px; }
+  .contact-list{ display:flex; flex-direction:column; gap:8px; font-size:14.5px; font-weight:700; }
+  .contact-list span.k{ color:var(--accent6); font-weight:800; margin-right:8px; }
+
+  @media (max-width:760px){
+    .twocol,.role-grid,.change-grid,.modalities,.criteria ul,.checklist,.stats{ grid-template-columns:1fr !important; }
+    .hero,section{ padding:36px 22px; }
+    .prio-wrap,.firststep{ margin:0 20px; padding:26px 22px; }
+    footer{ margin:36px 20px 0; padding:26px 22px; }
+    .timeline{ flex-direction:column; gap:22px; }
+    .timeline::before{ display:none; }
+    .tl-item{ width:100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-eyebrow">Comunicación de Impacto Tangible · Fundación Comuntia</span>
+    <h1>Extiende tus Alas<br><em>Guía de canalización</em></h1>
+    <p class="lead">Todo lo que las Procuradurías necesitan saber para identificar, preparar y canalizar candidatos al programa que acompaña a jóvenes egresados de Centros de Asistencia Social hacia su autonomía.</p>
+    <div class="hero-audience"><span class="dot"></span> Guía dirigida a PENNA y PAPNNAs</div>
+  </div>
+
+  <!-- QUÉ ES / OBJETIVO -->
+  <section>
+    <div class="section-tag">El programa</div>
+    <div class="section-title">Qué es Extiende tus Alas</div>
+    <div class="twocol">
+      <div class="card">
+        <h3>Qué hacemos</h3>
+        <p>Apoyamos a personas en situación de vulnerabilidad —especialmente jóvenes egresados de Centros de Asistencia Social— mediante becas, acompañamiento y vinculación, para fomentar su autonomía y desarrollo.</p>
+      </div>
+      <div class="card filled">
+        <h3>Objetivo</h3>
+        <p>Brindar acompañamiento y apoyo integral, promoviendo el desarrollo personal, educativo, profesional y económico de cada joven, para impulsar su éxito y autonomía.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGROS -->
+  <section class="stats-wrap">
+    <div class="section-tag">Resultados 2023 – 2025</div>
+    <div class="section-title">Un programa con trayectoria comprobada</div>
+    <div class="stats">
+      <div class="stat hi"><div class="num">24</div><div class="lbl">Beneficiarios</div></div>
+      <div class="stat"><div class="num">77%</div><div class="lbl">Continuó sus estudios</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl">Mantuvo vivienda y alimentación</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl">Mantuvo o adquirió empleo</div></div>
+      <div class="stat"><div class="num">54%</div><div class="lbl">Avanzó en metas personales</div></div>
+    </div>
+    <div class="years">2023 &nbsp;·&nbsp; 2024 &nbsp;·&nbsp; 2025 &nbsp;·&nbsp; 3 generaciones acompañadas</div>
+  </section>
+
+  <!-- ROL DE LAS PROCURADURÍAS -->
+  <section>
+    <div class="section-tag">Su rol</div>
+    <div class="section-title">Ustedes son aliados clave del programa</div>
+    <p class="section-sub">Como dependencia canalizadora, su participación hace posible que cada joven llegue al acompañamiento adecuado en el momento correcto.</p>
+    <div class="role-grid">
+      <div class="role-card"><div class="n">01</div><p>Identificar candidatos que cumplan el perfil del programa</p></div>
+      <div class="role-card"><div class="n">02</div><p>Integrar información clara y oportuna sobre cada caso</p></div>
+      <div class="role-card"><div class="n">03</div><p>Acompañar el proceso de canalización hasta su conclusión</p></div>
+    </div>
+    <div class="allies"><span>PENNA</span><span>PAPNNAs</span></div>
+  </section>
+
+  <!-- QUÉ CAMBIA 2026 -->
+  <section>
+    <div class="section-tag">Por qué se ajusta el programa</div>
+    <div class="section-title">Qué cambia a partir de 2026</div>
+    <p class="section-sub">La última evaluación anual mostró que el aprovechamiento varía según la trayectoria previa de cada joven y que su proyecto de vida influye directamente en los resultados. Por eso ajustamos la mecánica para optimizar recursos y adecuar el acompañamiento a cada perfil.</p>
+    <div class="change-grid">
+      <div class="change"><div class="ico">1</div><p>Nueva lógica general de canalización</p></div>
+      <div class="change"><div class="ico">2</div><p>Canalización estructurada y periódica (cuatrimestral)</p></div>
+      <div class="change"><div class="ico">3</div><p>Clasificación de postulantes en dos modalidades</p></div>
+      <div class="change"><div class="ico">4</div><p>Priorización de casos con mayor claridad y preparación</p></div>
+      <div class="change"><div class="ico">5</div><p>Mayor claridad en requisitos y expectativas para todos los actores</p></div>
+    </div>
+  </section>
+
+  <!-- FECHAS CLAVE -->
+  <section class="timeline-wrap">
+    <div class="section-tag">Cuándo enviar postulaciones</div>
+    <div class="section-title">Canalización cuatrimestral</div>
+    <p class="section-sub">A partir de 2026, Comuntia solicita a las Procuradurías enviar postulaciones a más tardar en tres cortes al año.</p>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot">D</div><div class="tl-month">Diciembre</div><div class="tl-note">1er corte del año</div></div>
+      <div class="tl-item"><div class="tl-dot">A</div><div class="tl-month">Abril</div><div class="tl-note">2º corte del año</div></div>
+      <div class="tl-item"><div class="tl-dot">A</div><div class="tl-month">Agosto</div><div class="tl-note">3er corte del año</div></div>
+    </div>
+    <div class="pin-note">📌 La planeación anticipada es clave para asegurar lugares.</div>
+  </section>
+
+  <!-- MODALIDADES -->
+  <section>
+    <div class="section-tag">Clasificación de postulantes</div>
+    <div class="section-title">Dos modalidades de acompañamiento</div>
+    <p class="section-sub">La asignación depende del nivel de trayectoria y del proyecto de vida del joven — no es una evaluación de su valor, sino de su momento de proceso.</p>
+
+    <div class="modalities">
+      <div class="mod segura">
+        <div class="mod-head"><div class="tag">Modalidad</div><h3>Transición Segura</h3></div>
+        <div class="mod-body">
+          <div class="mod-row"><b>Objetivo</b><span>Facilitar la adaptación a la vida fuera de la institución</span></div>
+          <div class="mod-row"><b>Residencia</b><span>Cualquier municipio de Guanajuato</span></div>
+          <div class="mod-row"><b>Incluye</b><span>Vivienda, alimentos, canalización a programas sociales</span></div>
+          <span class="mod-duration">Apoyo hasta por 1 año</span>
+        </div>
+      </div>
+      <div class="mod exito">
+        <div class="mod-head"><div class="tag">Modalidad</div><h3>Impulso al Éxito</h3></div>
+        <div class="mod-body">
+          <div class="mod-row"><b>Enfoque</b><span>Consolidación del proyecto de vida</span></div>
+          <div class="mod-row"><b>Requisito</b><span>Residencia en el municipio de León</span></div>
+          <div class="mod-row"><b>Incluye</b><span>Gastos de vida, educación, inserción laboral, inclusión social, salud</span></div>
+          <span class="mod-duration">Acompañamiento hasta por 3 años</span>
+        </div>
+      </div>
+    </div>
+    <div class="flow-arrow">Transición Segura → puede avanzar a → Impulso al Éxito, con avance comprobable y seguimiento continuo</div>
+
+    <div class="criteria">
+      <div class="criteria-title">Criterio decisivo de asignación: progresión en metas personales</div>
+      <ul>
+        <li>Existencia de un proyecto de vida</li>
+        <li>Metas personales identificadas</li>
+        <li>Evidencia de avance o constancia</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PRIORIZACIÓN -->
+  <div class="prio-wrap">
+    <div class="section-tag">Cupo limitado</div>
+    <div class="section-title">Priorización de lugares</div>
+    <p class="section-sub">Se dará prioridad a canalizaciones realizadas con anticipación y con expediente completo.</p>
+    <div class="checklist">
+      <div class="check"><span class="c-ico">✓</span> Datos generales del candidato</div>
+      <div class="check"><span class="c-ico">✓</span> Carta de canalización completa</div>
+      <div class="check"><span class="c-ico">✓</span> Casos de Impulso al Éxito sobre Transición Segura</div>
+    </div>
+    <span class="prio-tag">Expediente completo = mayor prioridad</span>
+  </div>
+
+  <!-- PRIMER PASO -->
+  <div class="firststep">
+    <div class="section-tag">Primer paso</div>
+    <div class="section-title">Datos para iniciar la canalización</div>
+    <p class="section-sub">Esta es la información que necesitamos para abrir el expediente de cada candidato.</p>
+    <div class="fs-list">
+      <div class="fs-item">
+        <div class="fs-num">1</div>
+        <div><b>Datos de identificación</b><p>Nombre completo y, de ser posible, CURP; fecha de nacimiento.</p></div>
+      </div>
+      <div class="fs-item">
+        <div class="fs-num">2</div>
+        <div><b>Ubicación actual</b><p>Municipio en que vive y, de ser posible, el CAS en el que se encuentra.</p></div>
+      </div>
+      <div class="fs-item">
+        <div class="fs-num">3</div>
+        <div><b>Carta de canalización</b><p>Descripción general del caso: tiempo en CAS, comportamiento o posibles riesgos, escolaridad actual, planes a futuro y demás información sustancial que puedan compartir sin infringir normativas aplicables.</p></div>
+      </div>
+    </div>
+    <p class="fs-disclaimer">* La asignación de lugares está sujeta a disponibilidad de cupos del programa.</p>
+  </div>
+
+  <!-- CONTACTO -->
+  <footer>
+    <div>
+      <h3>Colaboremos</h3>
+      <p class="msg">Los ajustes implementados fortalecen el programa y aseguran que cada joven reciba el acompañamiento más adecuado a su proceso. Agradecemos el compromiso de las Procuradurías, cuya colaboración es esencial para el impacto de Extiende tus Alas.</p>
+    </div>
+    <div class="contact-list">
+      <div><span class="k">Tel</span>479-214-1050</div>
+      <div><span class="k">Mail</span>extiendetusalas@comuntia.org</div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
