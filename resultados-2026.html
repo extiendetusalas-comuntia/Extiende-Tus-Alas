@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extiende tus Alas — Datos para campaña</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --dk1:#000000;
+    --lt1:#FFFFFF;
+    --dk2:#4EC3E0;
+    --lt2:#A192B2;
+    --accent1:#A4D65E;
+    --accent2:#A0DFEE;
+    --accent3:#B3A7C1;
+    --accent4:#ABDA6C;
+    --accent5:#5168AF;
+    --accent6:#F9D055;
+
+    --ink:#20242b;
+    --paper:#fbfaf7;
+    --paper-2:#f2f0ea;
+    --line: rgba(32,36,43,0.12);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+
+  .page{ max-width:1000px; margin:0 auto; padding:0 0 40px 0; }
+
+  h1,h2,h3{ font-family:'Fraunces', serif; margin:0; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background: linear-gradient(160deg, var(--accent5) 0%, #405295 55%, #333f77 100%);
+    color:var(--lt1);
+    padding:64px 48px 56px;
+    overflow:hidden;
+    border-radius:0 0 32px 32px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; top:-90px; right:-90px;
+    width:300px; height:300px; border-radius:50%;
+    background:var(--accent1); opacity:0.16;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; bottom:-120px; left:-60px;
+    width:260px; height:260px; border-radius:50%;
+    background:var(--dk2); opacity:0.18;
+  }
+  .hero-eyebrow{
+    font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+    font-weight:700; color:var(--accent6); margin-bottom:14px; position:relative; z-index:2;
+  }
+  .hero h1{
+    font-size:clamp(32px,5vw,50px); font-weight:600; line-height:1.08; letter-spacing:-.01em;
+    position:relative; z-index:2; max-width:680px;
+  }
+  .hero h1 em{ font-style:normal; color:var(--accent1); }
+  .hero p.lead{
+    margin-top:18px; font-size:16.5px; max-width:580px; color:#e9e9f4;
+    position:relative; z-index:2; font-weight:500;
+  }
+  .hero-audience{
+    margin-top:28px; display:inline-flex; gap:10px; align-items:center;
+    background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25);
+    padding:10px 18px; border-radius:100px; font-size:13.5px; font-weight:700;
+    position:relative; z-index:2;
+  }
+  .hero-audience .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent1); }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding:44px 48px; position:relative; }
+  .section-tag{
+    font-size:12px; font-weight:800; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--accent5); margin-bottom:8px;
+  }
+  .section-title{ font-size:26px; font-weight:600; margin-bottom:6px; }
+  .section-sub{ color:#5b5f6b; font-size:14.5px; max-width:660px; margin-bottom:26px; }
+
+  /* Stats strip */
+  .stats-wrap{ background:var(--paper-2); }
+  .stats{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .stat{
+    background:var(--lt1); border-radius:16px; padding:20px 12px; text-align:center;
+    border:1px solid var(--line);
+  }
+  .stat .num{ font-family:'Fraunces',serif; font-size:27px; font-weight:600; color:var(--accent5); }
+  .stat .lbl{ font-size:11.5px; color:#5b5f6b; margin-top:4px; font-weight:600; }
+  .stat.hi .num{ color:var(--accent1); }
+  .stat.hi { border-color: var(--accent1); }
+  .stat .note{ font-size:10px; color:#9a9daa; margin-top:2px; }
+
+  /* Género — comparación */
+  .gender-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .gcard{ border-radius:20px; overflow:hidden; border:1px solid var(--line); background:var(--lt1); }
+  .gcard .ghead{ padding:20px 22px; color:var(--lt1); }
+  .gcard.women .ghead{ background:var(--accent5); }
+  .gcard.men .ghead{ background:var(--lt2); }
+  .ghead .tag{ font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.1em; opacity:.8; }
+  .ghead .pct{ font-family:'Fraunces',serif; font-size:40px; font-weight:600; margin-top:4px; }
+  .gbody{ padding:18px 22px 22px; font-size:13.5px; color:#3a3d45; }
+  .gbody .sub{ color:#5b5f6b; font-size:12.5px; margin-top:6px; }
+  .insight{
+    margin-top:20px; background:var(--lt1); border-left:4px solid var(--accent6);
+    padding:14px 18px; border-radius:8px; font-size:13.5px; font-weight:600;
+  }
+
+  /* Diagrama de araña — 5 rubros de acompañamiento */
+  .radar-wrap{ background:linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%); }
+  .radar-layout{ display:grid; grid-template-columns:1.1fr 1fr; gap:30px; align-items:center; }
+  .radar-svg{ width:100%; height:auto; }
+  .radar-legend{ display:flex; flex-direction:column; gap:12px; }
+  .rlvl{
+    display:flex; align-items:center; gap:12px; background:var(--lt1); border:1px solid var(--line);
+    border-radius:12px; padding:12px 16px;
+  }
+  .rlvl .dot{ width:12px; height:12px; border-radius:50%; flex:none; }
+  .rlvl .txt{ font-size:13.5px; }
+  .rlvl .txt b{ display:block; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:#5b5f6b; }
+  .rlvl .rubros{ font-weight:700; }
+  .radar-note{
+    margin-top:22px; background:var(--lt1); border-left:4px solid var(--accent6);
+    padding:14px 18px; border-radius:8px; font-size:13.5px; font-weight:600;
+  }
+
+  /* Empleo + educación — donuts */
+  .donut-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .donut-card{ text-align:center; background:var(--lt1); border:1px solid var(--line); border-radius:18px; padding:22px 16px; }
+  .donut{
+    width:120px; height:120px; border-radius:50%; margin:0 auto 14px;
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .donut .center{
+    width:86px; height:86px; border-radius:50%; background:var(--lt1);
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+  }
+  .donut .center .n{ font-family:'Fraunces',serif; font-size:22px; font-weight:600; color:var(--ink); }
+  .donut-card p{ margin:0; font-size:13px; font-weight:700; color:#3a3d45; }
+
+  /* Mensajes de campaña */
+  .prio-wrap{ background:var(--accent5); color:var(--lt1); border-radius:24px; margin:0 48px 0; padding:36px 40px; }
+  .prio-wrap .section-tag{ color:var(--accent6); }
+  .prio-wrap .section-title{ color:var(--lt1); }
+  .prio-wrap .section-sub{ color:#dcdbee; }
+  .checklist{ display:flex; flex-direction:column; gap:14px; }
+  .check{
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.25);
+    border-radius:14px; padding:16px 18px; font-size:14px; font-weight:600;
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .check .c-ico{ color:var(--accent1); font-weight:900; font-size:16px; }
+  .check em{ font-style:normal; color:var(--accent6); }
+
+  /* Footer */
+  footer{
+    margin:44px 48px 0; background:var(--dk1); color:var(--lt1); border-radius:24px;
+    padding:38px 40px; display:flex; justify-content:space-between; align-items:center; gap:30px;
+    flex-wrap:wrap;
+  }
+  footer .msg{ max-width:480px; font-size:14px; color:#cfd0d6; }
+  footer h3{ color:var(--accent1); font-size:20px; margin-bottom:12px; }
+  .contact-list{ display:flex; flex-direction:column; gap:8px; font-size:14.5px; font-weight:700; }
+  .contact-list span.k{ color:var(--accent6); font-weight:800; margin-right:8px; }
+
+  @media (max-width:760px){
+    .stats,.gender-grid,.donut-grid,.radar-layout{ grid-template-columns:1fr !important; }
+    .hero,section{ padding:36px 22px; }
+    .prio-wrap{ margin:0 20px; padding:26px 22px; }
+    footer{ margin:36px 20px 0; padding:26px 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-eyebrow">Comunicación de Impacto Tangible · Fundación Comuntia</span>
+    <h1>Extiende tus Alas: <em>lo que dicen los datos</em></h1>
+    <p class="lead">Estadísticas y hallazgos de la generación activa del programa, organizados para orientar los mensajes y el diseño de la próxima campaña con aliados financieros.</p>
+    <div class="hero-audience"><span class="dot"></span> Documento de trabajo · Equipo de campaña</div>
+  </div>
+
+  <!-- PANORAMA GENERAL -->
+  <section class="stats-wrap">
+    <div class="section-tag">Panorama general</div>
+    <div class="section-title">Un programa activo y en trayectoria</div>
+    <div class="stats">
+      <div class="stat hi"><div class="num">22</div><div class="lbl">Jóvenes activos</div></div>
+      <div class="stat"><div class="num">61%</div><div class="lbl">Tasa de retención</div><div class="note">22 de 36 registrados</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl">Con empleo</div></div>
+      <div class="stat"><div class="num">82%</div><div class="lbl">En trayectoria educativa</div></div>
+      <div class="stat"><div class="num">3 años</div><div class="lbl">Para graduación o independencia</div></div>
+    </div>
+  </section>
+
+  <!-- GÉNERO -->
+  <section>
+    <div class="section-tag">Brecha de género</div>
+    <div class="section-title">Las mujeres permanecen casi el doble</div>
+    <p class="section-sub">La diferencia en retención coincide con un nivel de madurez socioemocional más avanzado observado en mujeres en la gran mayoría de los casos.</p>
+    <div class="gender-grid">
+      <div class="gcard women">
+        <div class="ghead"><div class="tag">Mujeres</div><div class="pct">72%</div></div>
+        <div class="gbody">18 activas de 25 registradas<div class="sub">Mayor permanencia sostenida en el programa</div></div>
+      </div>
+      <div class="gcard men">
+        <div class="ghead"><div class="tag">Hombres</div><div class="pct">44%</div></div>
+        <div class="gbody">4 activos de 9 registrados<div class="sub">Mayor vulnerabilidad frente a la deserción</div></div>
+      </div>
+    </div>
+    <div class="insight">💡 Posible ángulo de campaña: comunicar el acompañamiento socioemocional del programa, no solo el apoyo económico — es un diferenciador real y medible.</div>
+  </section>
+
+  <!-- ACOMPAÑAMIENTO INTEGRAL -->
+  <section class="radar-wrap">
+    <div class="section-tag">Modelo de acompañamiento</div>
+    <div class="section-title">Desarrollo en 5 rubros</div>
+    <p class="section-sub">Durante su proceso, cada joven es acompañado en cinco áreas de desarrollo. El diagrama muestra el grado de aprovechamiento y uso de los servicios en cada una.</p>
+    <div class="radar-layout">
+      <svg class="radar-svg" viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- grid rings -->
+        <polygon points="160,30 283.6,119.8 236.4,265.2 83.6,265.2 36.4,119.8" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <polygon points="160,62.5 252.7,129.85 217.3,238.9 102.7,238.9 67.3,129.85" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <polygon points="160,95 221.8,144.55 198.2,212.6 121.8,212.6 98.2,144.55" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <polygon points="160,127.5 190.9,152.3 179.1,186.3 140.9,186.3 129.1,152.3" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <!-- axes -->
+        <line x1="160" y1="160" x2="160" y2="30" stroke="var(--line)" stroke-width="1"/>
+        <line x1="160" y1="160" x2="283.6" y2="119.8" stroke="var(--line)" stroke-width="1"/>
+        <line x1="160" y1="160" x2="236.4" y2="265.2" stroke="var(--line)" stroke-width="1"/>
+        <line x1="160" y1="160" x2="83.6" y2="265.2" stroke="var(--line)" stroke-width="1"/>
+        <line x1="160" y1="160" x2="36.4" y2="119.8" stroke="var(--line)" stroke-width="1"/>
+        <!-- data polygon -->
+        <polygon points="160,43 271.3,123.8 202.05,217.84 117.95,217.84 129.1,149.96" fill="var(--accent1)" fill-opacity="0.35" stroke="var(--accent5)" stroke-width="2.5"/>
+        <!-- data points -->
+        <circle cx="160" cy="43" r="5" fill="var(--accent5)"/>
+        <circle cx="271.3" cy="123.8" r="5" fill="var(--accent5)"/>
+        <circle cx="202.05" cy="217.84" r="5" fill="var(--accent5)"/>
+        <circle cx="117.95" cy="217.84" r="5" fill="var(--accent5)"/>
+        <circle cx="129.1" cy="149.96" r="5" fill="var(--accent5)"/>
+        <!-- labels -->
+        <text x="160" y="18" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="700" font-size="13" fill="var(--ink)">Educativo</text>
+        <text x="303" y="112" text-anchor="start" font-family="Manrope, sans-serif" font-weight="700" font-size="13" fill="var(--ink)">Laboral</text>
+        <text x="246" y="284" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="700" font-size="13" fill="var(--ink)">Económico</text>
+        <text x="74" y="284" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="700" font-size="13" fill="var(--ink)">Salud</text>
+        <text x="17" y="112" text-anchor="start" font-family="Manrope, sans-serif" font-weight="700" font-size="13" fill="var(--ink)">Social</text>
+      </svg>
+      <div class="radar-legend">
+        <div class="rlvl"><span class="dot" style="background:var(--accent5);"></span><div class="txt"><b>Aprovechamiento alto</b><span class="rubros">Educativo · Laboral</span></div></div>
+        <div class="rlvl"><span class="dot" style="background:var(--dk2);"></span><div class="txt"><b>Aprovechamiento medio</b><span class="rubros">Económico · Salud</span></div></div>
+        <div class="rlvl"><span class="dot" style="background:var(--lt2);"></span><div class="txt"><b>Aprovechamiento bajo</b><span class="rubros">Social</span></div></div>
+      </div>
+    </div>
+    <div class="radar-note">📌 El rubro social muestra el menor grado de uso de servicios — una oportunidad clara para reforzar el acompañamiento y comunicarlo como área de crecimiento del programa.</div>
+  </section>
+
+  <!-- EMPLEO + EDUCACIÓN -->
+  <section>
+    <div class="section-tag">El resultado más contundente</div>
+    <div class="section-title">Empleo y estudio, al mismo tiempo</div>
+    <p class="section-sub">Sin el acompañamiento del programa, sostener ambos —trabajo y estudio— a la vez sería muy difícil o imposible para este perfil de jóvenes.</p>
+    <div class="donut-grid">
+      <div class="donut-card">
+        <div class="donut" style="background:conic-gradient(var(--accent1) 360deg, var(--paper-2) 0deg);">
+          <div class="center"><div class="n">100%</div></div>
+        </div>
+        <p>Tiene empleo</p>
+      </div>
+      <div class="donut-card">
+        <div class="donut" style="background:conic-gradient(var(--accent5) 360deg, var(--paper-2) 0deg);">
+          <div class="center"><div class="n">100%</div></div>
+        </div>
+        <p>Estudia o retoma sus estudios</p>
+      </div>
+      <div class="donut-card">
+        <div class="donut" style="background:conic-gradient(var(--dk2) 72deg, var(--paper-2) 0deg);">
+          <div class="center"><div class="n">20%</div></div>
+        </div>
+        <p>Aún está definiendo su plan académico</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENSAJES DE CAMPAÑA -->
+  <div class="prio-wrap">
+    <div class="section-tag">De datos a mensajes</div>
+    <div class="section-title">Posibles líneas de campaña</div>
+    <p class="section-sub">Redactadas a partir de los hallazgos anteriores, en el formato de "aportación → impacto tangible" que ya usa Comuntia.</p>
+    <div class="checklist">
+      <div class="check"><span class="c-ico">✓</span> "8 de cada 10 jóvenes de Extiende tus Alas <em>trabajan y estudian al mismo tiempo</em> — sin el programa, eso no sería posible."</div>
+      <div class="check"><span class="c-ico">✓</span> "Los primeros 3 meses y la mitad del 2° año son los momentos más críticos. Tu aportación sostiene <em>justo ahí</em>, cuando más se necesita."</div>
+      <div class="check"><span class="c-ico">✓</span> "<em>3 años.</em> Ese es el tiempo que toma pasar de la dependencia a la independencia real — y cada aportación acompaña ese camino."</div>
+    </div>
+  </div>
+
+  <!-- CONTACTO -->
+  <footer>
+    <div>
+      <h3>Para el equipo de campaña</h3>
+      <p class="msg">Este documento resume los hallazgos de la generación activa de Extiende tus Alas. Úsalo como base para el copy, la selección de cifras destacadas y la narrativa de la próxima campaña con aliados financieros.</p>
+    </div>
+    <div class="contact-list">
+      <div><span class="k">Tel</span>479-214-1050</div>
+      <div><span class="k">Mail</span>extiendetusalas@comuntia.org</div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
